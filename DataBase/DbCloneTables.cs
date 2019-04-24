@@ -9,57 +9,43 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using ClientAddresses;
 namespace Praktika
 {
-    public class Address
-    {        
-        private int id;
-        private string person;
-        private string street;
-        private int building;
-        private int? office;
-        private string city;
-        public int Id { get { return id; } set { id = value; } }
-        public string Person { get { return person; } set { person = value; } }
-        public string Street { get { return street; } set { street = value; } }
-        public int Building { get { return building; } set { building = value;  } }
-        public int? Office { get { return office; } set { office = value;  } }
-        public string City
-        {
-            get { return this.city; }
-            set { this.city = value;
-            }
-        }
-    }
-    public class City
-    {
-        private int id;
-        private string nameCity;
-        private string region;
-        public int Id { get => id; set { id = value;  } }
-        public string NameCity { get { return this.nameCity; } set { this.nameCity = value; } }
-        public string Region { get { return region; } set { region = value;} }
-    }
-    public class Region
-    {
-        private int id;
-        private string nameRegion;
-        private string country;
+    //public class Address
+    //{
+    //    public int Id { get; set; }
+    //    public string Person { get; set; }
+    //    public string Street { get; set; }
+    //    public int Building { get; set; }
+    //    public int? Office { get; set; }
+    //    public int CityId { get; set; }
+    //    public City City { get; set; }
 
-        public int Id { get { return id; } set { id = value; } }
-        public string NameRegion { get { return nameRegion; } set { nameRegion = value; } }
-        public string Country { get { return country; } set { country = value; } }
-    }
-    public class Country
-    {
-        private int id;
-        private string fullname;
-        private string shortName;
-        public int Id { get { return id; } set {  id = value; } }
-        public string FullName { get { return fullname; } set { fullname = value;  } }
-        public string ShortName { get { return shortName; } set { shortName = value; } }
-    }
+    //}
+    //public class City
+    //{
+    //    public int Id { get; set; }
+    //    public string NameCity { get; set; }
+    //    public int RegionId { get; set; }
+    //    public Region Region { get; set; }
+    //    public List<Address> Address { get; set; }
+    //}
+    //public class Region
+    //{
+    //    public int Id { get; set; }
+    //    public string NameRegion { get; set; }
+    //    public int CountryId { get; set; }
+    //    public List<City> City { get; set; }
+    //    public Country Country { get; set; }
+    //}
+    //public class Country
+    //{
+    //    public int Id { get; set; }
+    //    public string FullName { get; set; }
+    //    public string ShortName { get; set; }
+    //    public List<Region> Region { get; set; }
+    //}
 
     public class DbCloneTables : INotifyPropertyChanged
     {
@@ -94,18 +80,18 @@ namespace Praktika
                 }
                 foreach (var r in db.Region)
                 {
-                    Region region = new Region() { Id = r.Id, NameRegion = r.NameRegion, Country = r.Country.FullName };
-                    Regions.Add(region);
+                    //Praktika.Region region = new Region() { Id = r.Id, NameRegion = r.NameRegion, Country = r.Country };
+                    Regions.Add(r);
                 }
                 foreach (var ci in db.City)
                 {
-                    City city = new City() { Id = ci.Id, NameCity = ci.NameCity, Region = ci.Region.NameRegion };
-                    Cities.Add(city);
+                    //City city = new City() { Id = ci.Id, NameCity = ci.NameCity, Region = ci.Region.NameRegion };
+                    Cities.Add(ci);
                 }
                 foreach (var ad in db.Address)
                 {
-                    Address address = new Address() { Id = ad.Id, Building = ad.Building, City = ad.City.NameCity, Office = ad.Office, Person = ad.Person, Street = ad.Street };
-                    Addresses.Add(address);
+                    //Address address = new Address() { Id = ad.Id, Building = ad.Building, City = db.City, Office = ad.Office, Person = ad.Person, Street = ad.Street };
+                    Addresses.Add(ad);
                 }
 
             }
@@ -216,7 +202,7 @@ namespace Praktika
                         {
                             using (var db = new ClientAddresses.ClientAddresses())
                             {
-                                db.Region.Add(new ClientAddresses.Region { NameRegion = r.NameRegion, Country = db.Country.Where(c => c.ShortName == r.Country).FirstOrDefault() });
+                                db.Region.Add(new ClientAddresses.Region { NameRegion = r.NameRegion, Country = db.Country.Where(c => c.ShortName == r.Country.ShortName).FirstOrDefault() });
                                 db.SaveChanges();
                             }
                             DownloadInfoToLists();
@@ -283,7 +269,7 @@ namespace Praktika
                         {
                             ClientAddresses.Region tempRegion = db.Region.Where(c => c.Id == selR.Id).FirstOrDefault();
                             tempRegion.NameRegion = selR.NameRegion;
-                            tempRegion.CountryId = db.Country.Where(c => c.FullName == selR.Country).FirstOrDefault().Id;
+                            tempRegion.CountryId = db.Country.Where(c => c.ShortName == selR.Country.ShortName).FirstOrDefault().Id;
                             db.SaveChanges();
                         }
                     }
@@ -319,7 +305,7 @@ namespace Praktika
                     {
                         using (var db = new ClientAddresses.ClientAddresses())
                         {
-                            db.City.Add(new ClientAddresses.City() { NameCity = city.NameCity, RegionId = db.Region.Where(r => r.NameRegion == city.Region).FirstOrDefault().Id });
+                            db.City.Add(new ClientAddresses.City() { NameCity = city.NameCity, RegionId = db.Region.Where(r => r.NameRegion == city.Region.NameRegion).FirstOrDefault().Id });
                             db.SaveChanges();
                         }
                         DownloadInfoToLists();
@@ -345,7 +331,7 @@ namespace Praktika
                         {
                             ClientAddresses.City city = db.City.Where(c => c.Id == SelectedCity.Id).FirstOrDefault();
                             city.NameCity = selectedCity.NameCity;
-                            city.RegionId = db.Region.Where(r => r.NameRegion == SelectedCity.Region).FirstOrDefault().Id;
+                            city.RegionId = db.Region.Where(r => r.NameRegion == SelectedCity.Region.NameRegion).FirstOrDefault().Id;
                             db.SaveChanges();
                         }
                     }
@@ -407,7 +393,7 @@ namespace Praktika
                                 Building = address.Building,
                                 Office = address.Office,
                                 Street = address.Street,
-                                CityId = db.City.Where(c => c.NameCity == address.City).FirstOrDefault().Id
+                                CityId = db.City.Where(c => c.NameCity == address.City.NameCity).FirstOrDefault().Id
                             });
                             db.SaveChanges();
                         }
@@ -456,7 +442,7 @@ namespace Praktika
                             changeAd.Person = address.Person;
                             changeAd.Street = address.Street;
                             changeAd.Building = address.Building;
-                            changeAd.CityId = db.City.Where(c => c.NameCity == address.City).FirstOrDefault().Id;
+                            changeAd.CityId = db.City.Where(c => c.NameCity == address.City.NameCity).FirstOrDefault().Id;
                             db.SaveChanges();
                         }
                         DownloadInfoToLists();

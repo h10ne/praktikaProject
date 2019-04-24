@@ -10,7 +10,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="4,9,0,0" TextWrapping="Wrap" Text="Название города" FontSize="20" VerticalAlignment="Top" Width="173"/>
         <TextBox HorizontalAlignment="Left" Height="41" Margin="4,41,0,0" TextWrapping="Wrap" Text="{Binding NameCity}" FontSize="20" VerticalAlignment="Top" Width="350"/>
         <TextBlock HorizontalAlignment="Left" Margin="4,102,0,0" TextWrapping="Wrap" Text="Название региона" FontSize="20" VerticalAlignment="Top" Width="242"/>
-        <TextBox HorizontalAlignment="Left" Height="41" Margin="4,134,0,0" TextWrapping="Wrap" Text="{Binding Region}" FontSize="20" VerticalAlignment="Top" Width="350"/>
+        <TextBox HorizontalAlignment="Left" Height="41" Margin="4,134,0,0" TextWrapping="Wrap" Text="{Binding Region.NameRegion}" FontSize="20" VerticalAlignment="Top" Width="350"/>
         <Button Content="Принять" FontSize="22" HorizontalAlignment="Left" Margin="4,224,0,-36" VerticalAlignment="Top" Width="113" Click="Button_Click" Height="37"/>
         <Button Content="Отмена"  FontSize="22" HorizontalAlignment="Left" Margin="241,224,0,-36" VerticalAlignment="Top" Width="113" IsCancel="True" Height="37"/>
 

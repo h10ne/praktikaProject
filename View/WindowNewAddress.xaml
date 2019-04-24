@@ -10,7 +10,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="4,9,-162,0" TextWrapping="Wrap" Text="ФИО Клиента" FontSize="20" VerticalAlignment="Top" Width="158"/>
         <TextBox HorizontalAlignment="Left" Height="80" Margin="4,41,-323,0" TextWrapping="Wrap" Text="{Binding Person}" FontSize="20" VerticalAlignment="Top" Width="319"/>
         <TextBlock HorizontalAlignment="Left" Margin="4,126,-226,0" TextWrapping="Wrap" Text="Город" FontSize="20" VerticalAlignment="Top" Width="222"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="4,158,-324,0" TextWrapping="Wrap" Text="{Binding City}" FontSize="20" VerticalAlignment="Top" Width="320"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="4,158,-324,0" TextWrapping="Wrap" Text="{Binding City.NameCity}" FontSize="20" VerticalAlignment="Top" Width="320"/>
         <TextBlock HorizontalAlignment="Left" Margin="4,218,-225,0" TextWrapping="Wrap" Text="Название Улицы" FontSize="20" VerticalAlignment="Top" Width="221"/>
         <TextBox HorizontalAlignment="Left" Height="40" Margin="4,250,-323,0" TextWrapping="Wrap" Text="{Binding Street}" FontSize="20" VerticalAlignment="Top" Width="319"/>
         <TextBlock HorizontalAlignment="Left" Margin="4,308,-225,0" TextWrapping="Wrap" Text="Номер здания" FontSize="20" VerticalAlignment="Top" Width="221"/>

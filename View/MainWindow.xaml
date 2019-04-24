@@ -49,7 +49,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Название региона" Binding="{Binding NameRegion}"/>
-                                <DataGridTextColumn Header="Страна" Binding="{Binding Country}"/>
+                                <DataGridTextColumn Header="Страна" Binding="{Binding Country.FullName}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Grid Height="42" Margin="10,0" >
@@ -74,7 +74,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Название города" Binding="{Binding NameCity}"/>
-                                <DataGridTextColumn Header="Регоин" Binding="{Binding Region}"/>
+                                <DataGridTextColumn Header="Регоин" Binding="{Binding Region.NameRegion}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Grid Height="42" Margin="10,0" >
@@ -99,7 +99,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="ФИО" Binding="{Binding Person}"/>
-                                <DataGridTextColumn Header="Город" Binding="{Binding City}"/>
+                                <DataGridTextColumn Header="Город" Binding="{Binding City.NameCity}"/>
                                 <DataGridTextColumn Header="Улица" Binding="{Binding Street}"/>
                                 <DataGridTextColumn Header="Номер здания" Binding="{Binding Building}"/>
                                 <DataGridTextColumn Header="Номер офиса" Binding="{Binding Office}"/>
