@@ -9,6 +9,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Praktika
 {
@@ -473,8 +476,64 @@ namespace Praktika
 
             }
         }
-                
 
+        Task taskSaveToXml;
+        
+        public Commander SaveToXml
+        {
+            get
+            {
+                return new Commander((obj) =>
+                {
+                    taskSaveToXml = new Task(Serialize);
+                    taskSaveToXml.Start();
+
+
+
+                });
+            }
+        }
+
+
+        private void Serialize()
+        {
+            try
+            {
+                int cou = 1;
+                foreach (var c in countries)
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Country));
+                    serializer.Serialize(new StreamWriter($"Country {cou}.xml"), c);
+                    cou++;
+                }
+                int r = 1;
+                foreach (var c in Regions)
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Region));
+                    serializer.Serialize(new StreamWriter($"Region {r}.xml"), c);
+                    r++;
+                }
+                int ci = 1;
+                foreach (var c in Cities)
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(City));
+                    serializer.Serialize(new StreamWriter($"City {ci}.xml"), c);
+                    ci++;
+                }
+                int ad = 1;
+                foreach (var c in Addresses)
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Address));
+                    serializer.Serialize(new StreamWriter($"Address {ad}.xml"), c);
+                    ad++;
+                }
+                MessageBox.Show("Успешно сохранено!", "Сохранено!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Cохранить не удалось!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
     }
 }

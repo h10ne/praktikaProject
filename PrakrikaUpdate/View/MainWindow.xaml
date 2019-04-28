@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PrakrikaUpdate"        
         xmlns:vm="clr-namespace:Praktika"
         mc:Ignorable="d"
-        Title="Интерфейс работы с БД" Height="506.285" Width="551.475">
+        Title="Интерфейс работы с БД" Height="473.167" Width="551.475">
     <Window.DataContext>
         <vm:DbCloneTables/>
     </Window.DataContext>
@@ -15,19 +15,19 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TabControl HorizontalAlignment="Left" Height="475" VerticalAlignment="Top" Width="543">
+        <TabControl HorizontalAlignment="Left" Height="448" VerticalAlignment="Top" Width="543" Margin="0,27,0,0">
 
             <TabItem Header="Страна">
-                <Grid Background="#FFE5E5E5">
-                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Height="450" Margin="0,0,0,0" Width="543">
-                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Countries}" x:Name="CountryGrid" HorizontalAlignment="Left" Height="382" Margin="0,0,0,10" VerticalAlignment="Top"  SelectedItem="{Binding SelectedCountry}" Width="543" >
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,2">
+                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Margin="0,-7,-13,0" Width="550">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Countries}" x:Name="CountryGrid" HorizontalAlignment="Left" Height="346" Margin="0,0,0,10" VerticalAlignment="Top"  SelectedItem="{Binding SelectedCountry}" Width="543" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Полное имя" Binding="{Binding FullName}"/>
                                 <DataGridTextColumn Header="Краткое имя" Binding="{Binding ShortName}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Grid Height="42" Margin="10,0" >
+                        <Grid Height="42" Margin="9,-5" >
                             <Grid.ColumnDefinitions >
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -120,5 +120,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Button Content="Сохранить все в xml" Command="{Binding SaveToXml}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127"/>
     </Grid>
 </Window>
