@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Интерфейс работы с БД" Height="480" Width="552.475">
     <Window.DataContext>
-        <vm:DbCloneTables/>
+        <vm:ViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -44,8 +44,12 @@
 
             <TabItem Header="Регион">
                 <Grid Background="#FFE5E5E5">
-                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Height="450" Margin="0,0,0,0" Width="543">
-                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedRegion}" ItemsSource="{Binding Regions}" x:Name="RegionGrid" HorizontalAlignment="Left" Height="382" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="204*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Margin="0,0,-6,10" Width="543" Grid.ColumnSpan="2">
+                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedRegion}" ItemsSource="{Binding Regions}" x:Name="RegionGrid" HorizontalAlignment="Left" Height="328" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Название региона" Binding="{Binding NameRegion}"/>
@@ -70,7 +74,7 @@
             <TabItem Header="Город">
                 <Grid Background="#FFE5E5E5">
                     <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Height="450" Margin="0,0,0,0" Width="543">
-                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedCity}" ItemsSource="{Binding Cities}" x:Name="CityGrid" HorizontalAlignment="Left" Height="382" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
+                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedCity}" ItemsSource="{Binding Cities}" x:Name="CityGrid" HorizontalAlignment="Left" Height="336" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Название города" Binding="{Binding NameCity}"/>
@@ -95,7 +99,7 @@
             <TabItem Header="Клиент">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,21">
                     <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Margin="0" Width="543">
-                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedAddress}" ItemsSource="{Binding Addresses}" x:Name="AddressGrid" HorizontalAlignment="Left" Height="320" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
+                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedAddress}" ItemsSource="{Binding Addresses}" x:Name="AddressGrid" HorizontalAlignment="Left" Height="329" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="ФИО" Binding="{Binding Person}"/>

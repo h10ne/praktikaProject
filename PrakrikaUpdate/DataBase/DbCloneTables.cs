@@ -28,12 +28,7 @@ namespace Praktika
         public string Street { get { return street; } set { street = value; } }
         public int Building { get { return building; } set { building = value;  } }
         public int? Office { get { return office; } set { office = value;  } }
-        public string City
-        {
-            get { return this.city; }
-            set { this.city = value;
-            }
-        }
+        public string City { get { return this.city; } set { this.city = value; } }
     }
     public class City
     {
@@ -64,7 +59,7 @@ namespace Praktika
         public string ShortName { get { return shortName; } set { shortName = value; } }
     }
 
-    public class DbCloneTables : INotifyPropertyChanged
+    public class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -76,10 +71,27 @@ namespace Praktika
         private ObservableCollection<Region> regions;
         private ObservableCollection<City> cities;
         private ObservableCollection<Address> addresses;
-        public ObservableCollection<Country> Countries { get { return countries; } set { countries = value; OnPropertyChanged("Countries"); } }
-        public ObservableCollection<Region> Regions { get { return regions; } set { regions = value; OnPropertyChanged("Regions"); } }
-        public ObservableCollection<City> Cities { get { return cities; } set { cities = value; OnPropertyChanged("Cities"); } }
-        public ObservableCollection<Address> Addresses { get { return addresses; } set { addresses = value; OnPropertyChanged("Addresses"); } }
+        public ObservableCollection<Country> Countries
+        {
+            get
+            { return countries; }
+            set { countries = value; OnPropertyChanged("Countries"); }
+        }
+        public ObservableCollection<Region> Regions
+        {
+            get { return regions; }
+            set { regions = value; OnPropertyChanged("Regions"); }
+        }
+        public ObservableCollection<City> Cities
+        {
+            get { return cities; }
+            set { cities = value; OnPropertyChanged("Cities"); }
+        }
+        public ObservableCollection<Address> Addresses
+        {
+            get { return addresses; }
+            set { addresses = value; OnPropertyChanged("Addresses"); }
+        }
 
         public void DownloadInfoToLists()
         {
@@ -113,7 +125,7 @@ namespace Praktika
 
             }
         }
-        public DbCloneTables()
+        public ViewModel()
         {
             DownloadInfoToLists();
         }
