@@ -1,11 +1,6 @@
 ﻿
+using PrakrikaUpdate.Model;
 using PrakrikaUpdate.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace PrakrikaUpdate
@@ -17,8 +12,9 @@ namespace PrakrikaUpdate
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var model = new MainWindowVM();
-            MainWindow wnd = new MainWindow(model);
+            var model = new MainWindowModel();
+            var vmodel = new MainWindowVM(model);
+            MainWindow wnd = new MainWindow(vmodel);
             wnd.Show();
         }
     }

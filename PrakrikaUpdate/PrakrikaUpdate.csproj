@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\MainWindowModel.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\WindowNewAddress.xaml.cs">
       <DependentUpon>WindowNewAddress.xaml</DependentUpon>
@@ -140,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AddWindowsVM\" />
-    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

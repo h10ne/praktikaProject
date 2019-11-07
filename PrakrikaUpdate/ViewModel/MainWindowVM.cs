@@ -13,11 +13,13 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.IO;
 using DateBase;
+using PrakrikaUpdate.Model;
 
 namespace PrakrikaUpdate.ViewModel
 {
     public class MainWindowVM : INotifyPropertyChanged
     {
+        private MainWindowModel _model;
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -56,34 +58,15 @@ namespace PrakrikaUpdate.ViewModel
             Regions = new ObservableCollection<Region>();
             Cities = new ObservableCollection<City>();
             Addresses = new ObservableCollection<Address>();
-            using (var db = new Context())
-            {
-                foreach (var c in db.Country)
-                {
-                    Country countr = c;
-                    Country country = new Country() { Id = countr.Id, FullName = countr.FullName, ShortName = countr.ShortName };
-                    Countries.Add(country);
-                }
-                foreach (var r in db.Region)
-                {
-                    Region region = new Region() { Id = r.Id, NameRegion = r.NameRegion, Country = r.Country };
-                    Regions.Add(region);
-                }
-                foreach (var ci in db.City)
-                {
-                    City city = new City() { Id = ci.Id, NameCity = ci.NameCity, Region = ci.Region };
-                    Cities.Add(city);
-                }
-                foreach (var ad in db.Address)
-                {
-                    Address address = new Address() { Id = ad.Id, Building = ad.Building, City = ad.City, Office = ad.Office, Person = ad.Person, Street = ad.Street };
-                    Addresses.Add(address);
-                }
-
-            }
+            _model.DownloadInfoToLists(ref countries, ref regions, ref cities, ref addresses);
+            OnPropertyChanged(nameof(Countries));
+            OnPropertyChanged(nameof(Regions));
+            OnPropertyChanged(nameof(Cities));
+            OnPropertyChanged(nameof(Addresses));
         }
-        public MainWindowVM()
+        public MainWindowVM(MainWindowModel model)
         {
+            _model = model;
             DownloadInfoToLists();
         }
         private Country selectedCountry;
@@ -111,11 +94,7 @@ namespace PrakrikaUpdate.ViewModel
                     vcountry.DataContext = c;
                     if (vcountry.ShowDialog() == true)
                     {
-                        using (var db = new Context())
-                        {
-                            db.Country.Add(new Country { FullName = c.FullName, ShortName = c.ShortName });
-                            db.SaveChanges();
-                        }
+                        _model.AddCountry(c);
                         DownloadInfoToLists();
                     }
                 });
@@ -129,16 +108,8 @@ namespace PrakrikaUpdate.ViewModel
             {
                 return new Commander((obj) =>
                 {
-                    Country country = SelectedCountry;
-                    using (var db = new Context())
-                    {
-                        Country co = new Country() { Id = country.Id, FullName = country.FullName, ShortName = country.ShortName };
-                        db.Country.Attach(co);
-                        db.Country.Remove(co);
-                        db.SaveChanges();
-                    };
+                    _model.DeleteCountry(SelectedCountry);
                     DownloadInfoToLists();
-
                 }, (obj) => SelectedCountry != null);
 
             }
@@ -159,15 +130,8 @@ namespace PrakrikaUpdate.ViewModel
 
                     if (newCountry.ShowDialog() == true)
                     {
-                        using (var db = new Context())
-                        {
-                            Country tempCountry = db.Country.Where(c => c.Id == selC.Id).FirstOrDefault();
-                            tempCountry.FullName = selC.FullName;
-                            tempCountry.ShortName = selC.ShortName;
-                            db.SaveChanges();
-                        }
+                        _model.ChangeCountry(selC);
                     }
-
                     DownloadInfoToLists();
                 }, (obj) => SelectedCountry != null);
             }
@@ -187,11 +151,8 @@ namespace PrakrikaUpdate.ViewModel
                     {
                         if (vcountry.ShowDialog() == true)
                         {
-                            using (var db = new Context())
-                            {
-                                db.Region.Add(new Region { NameRegion = r.NameRegion, Country = db.Country.Where(c => c.FullName == vcountry.CountryBox.SelectedItem.ToString()).FirstOrDefault() });
-                                db.SaveChanges();
-                            }
+
+                            _model.AddRegion(r.NameRegion, vcountry.CountryBox.SelectedItem.ToString());
                             DownloadInfoToLists();
                         }
                     }
@@ -222,14 +183,7 @@ namespace PrakrikaUpdate.ViewModel
             {
                 return new Commander((obj) =>
                 {
-                    Region region = SelectedRegion;
-                    using (var db = new Context())
-                    {
-                        Region re = new Region() { Id = SelectedRegion.Id };
-                        db.Region.Attach(re);
-                        db.Region.Remove(re);
-                        db.SaveChanges();
-                    };
+                    _model.DeleteRegion(SelectedRegion);
                     DownloadInfoToLists();
 
                 }, (obj) => SelectedRegion != null);
@@ -250,16 +204,10 @@ namespace PrakrikaUpdate.ViewModel
                     Region selR = SelectedRegion;
                     newRegion.DataContext = selR;
                     newRegion.CountryBox.ItemsSource = Countries.Select(c => c.FullName);
-                    newRegion.CountryBox.SelectedItem = SelectedRegion.Country;
+                    newRegion.CountryBox.SelectedItem = SelectedRegion.Country.FullName;
                     if (newRegion.ShowDialog() == true)
                     {
-                        using (var db = new Context())
-                        {
-                            Region tempRegion = db.Region.Where(c => c.Id == selR.Id).FirstOrDefault();
-                            tempRegion.NameRegion = selR.NameRegion;
-                            tempRegion.CountryId = db.Country.Where(c => c.FullName == newRegion.CountryBox.SelectedItem.ToString()).FirstOrDefault().Id;
-                            db.SaveChanges();
-                        }
+                        _model.ChangeRegion(SelectedRegion, selR.NameRegion, newRegion.CountryBox.SelectedItem.ToString());
                     }
                     DownloadInfoToLists();
                 }, (obj) => SelectedRegion != null);
@@ -286,17 +234,18 @@ namespace PrakrikaUpdate.ViewModel
             {
                 return new Commander((obj) =>
                 {
-                    WindowNewCity newCity = new WindowNewCity();
+                    WindowNewCity winCity = new WindowNewCity();
                     City city = new City();
-                    newCity.DataContext = city;
-                    newCity.RegionBox.ItemsSource = Regions.Select(c => c.NameRegion);
-                    if (newCity.ShowDialog() == true)
+                    winCity.DataContext = city;
+                    winCity.RegionBox.ItemsSource = Regions.Select(c => c.NameRegion);
+                    if (winCity.ShowDialog() == true)
                     {
-                        using (var db = new Context())
+                        var newCity = new City()
                         {
-                            db.City.Add(new City() { NameCity = city.NameCity, RegionId = db.Region.Where(r => r.NameRegion == newCity.RegionBox.SelectedItem.ToString()).FirstOrDefault().Id });
-                            db.SaveChanges();
-                        }
+                            NameCity = city.NameCity,
+                            RegionId = Regions.Where(r => r.NameRegion == winCity.RegionBox.SelectedItem.ToString()).FirstOrDefault().Id
+                        };
+                        _model.AddCity(newCity);
                         DownloadInfoToLists();
                     }
                 });
@@ -309,22 +258,19 @@ namespace PrakrikaUpdate.ViewModel
             {
                 return new Commander((obj) =>
                 {
-                    WindowNewCity newCity = new WindowNewCity()
+                    WindowNewCity cityWin = new WindowNewCity()
                     {
                         Title = "Изменить город"
                     };
-                    newCity.DataContext = SelectedCity;
-                    newCity.RegionBox.ItemsSource = Regions.Select(c => c.NameRegion);
-                    newCity.RegionBox.SelectedItem = SelectedCity.Region;
-                    if (newCity.ShowDialog() == true)
+                    var city = SelectedCity;
+                    cityWin.DataContext = city;
+                    cityWin.RegionBox.ItemsSource = Regions.Select(c => c.NameRegion);
+                    cityWin.RegionBox.SelectedItem = SelectedCity.Region.NameRegion;
+                    if (cityWin.ShowDialog() == true)
                     {
-                        using (var db = new Context())
-                        {
-                            City city = db.City.Where(c => c.Id == SelectedCity.Id).FirstOrDefault();
-                            city.NameCity = selectedCity.NameCity;
-                            city.RegionId = db.Region.Where(r => r.NameRegion == newCity.RegionBox.SelectedItem.ToString()).FirstOrDefault().Id;
-                            db.SaveChanges();
-                        }
+                        var newCity = city;
+                        newCity.RegionId = Regions.Where(r => r.NameRegion == cityWin.RegionBox.SelectedItem.ToString()).FirstOrDefault().Id;
+                        _model.ChangeCity(newCity);
                     }
                     DownloadInfoToLists();
                 }, (obj) => SelectedCity != null);
