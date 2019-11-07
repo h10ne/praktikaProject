@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+
+/*
 namespace qwe
 {
     public class Address : INotifyPropertyChanged
@@ -134,4 +136,4 @@ namespace qwe
         }
     }
 }
-
+*/

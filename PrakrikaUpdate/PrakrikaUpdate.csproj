@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\WindowNewAddress.xaml.cs">
       <DependentUpon>WindowNewAddress.xaml</DependentUpon>
     </Compile>
@@ -75,7 +76,7 @@
     <Compile Include="View\WindowNewRegion.xaml.cs">
       <DependentUpon>WindowNewRegion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLClass.cs" />
+    <Compile Include="Helpers\XMLClass.cs" />
     <Page Include="View\WindowNewAddress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,8 +94,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Class1.cs" />
-    <Compile Include="DataBase\ClientAddresses.cs" />
-    <Compile Include="Commander.cs" />
+    <Compile Include="DataBase\Context.cs" />
+    <Compile Include="Helpers\Commander.cs" />
     <Compile Include="DataBase\DateBaseTables.cs" />
     <Compile Include="DataBase\DbCloneTables.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AddWindowsVM\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

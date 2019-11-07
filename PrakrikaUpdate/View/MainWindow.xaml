@@ -6,124 +6,131 @@
         xmlns:local="clr-namespace:PrakrikaUpdate"        
         xmlns:vm="clr-namespace:Praktika"
         mc:Ignorable="d"
-        Title="Интерфейс работы с БД" Height="480" Width="552.475">
-    <Window.DataContext>
-        <vm:ViewModel/>
-    </Window.DataContext>
+        Title="Интерфейс работы с БД" Height="480" Width="645.143">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <TabControl HorizontalAlignment="Left" Height="433" VerticalAlignment="Top" Width="543" Margin="0,30,0,0">
+        <TabControl  Grid.Row="1">
 
-            <TabItem Header="Страна">
-                <Grid Background="#FFE5E5E5" Margin="0,0,0,-4">
-                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Margin="0,-7,-13,0" Width="550">
-                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Countries}" x:Name="CountryGrid" HorizontalAlignment="Left" Height="346" Margin="0,0,0,10" VerticalAlignment="Top"  SelectedItem="{Binding SelectedCountry}" Width="543" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Полное имя" Binding="{Binding FullName}"/>
-                                <DataGridTextColumn Header="Краткое имя" Binding="{Binding ShortName}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Grid Height="42" Margin="9,-5" >
-                            <Grid.ColumnDefinitions >
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+            <TabItem Padding="5" Header="Страна">
 
-                            <Button Command="{Binding AddCountry}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
-                            <Button Content="Изменить" Command="{Binding ChangeCountry}" Height="30" Width="90"  Grid.Column="1"/>
-                            <Button Content="Удалить" Command="{Binding DeleteCountry}" Height="30" Width="90" Grid.Column="2"/>
-                        </Grid>
-                    </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="42"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding Countries}" x:Name="CountryGrid" SelectedItem="{Binding SelectedCountry}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="2*"/>
+                            <DataGridTextColumn Header="Полное имя" Binding="{Binding FullName}" Width="13*"/>
+                            <DataGridTextColumn Header="Краткое имя" Binding="{Binding ShortName}" Width="7*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Height="42" Grid.Row="1">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Command="{Binding AddCountry}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
+                        <Button Content="Изменить" Command="{Binding ChangeCountry}" Height="30" Width="90"  Grid.Column="1"/>
+                        <Button Content="Удалить" Command="{Binding DeleteCountry}" Height="30" Width="90" Grid.Column="2"/>
+                    </Grid>
                 </Grid>
             </TabItem>
 
             <TabItem Header="Регион">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="65*"/>
-                        <ColumnDefinition Width="204*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Margin="0,0,-6,10" Width="543" Grid.ColumnSpan="2">
-                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedRegion}" ItemsSource="{Binding Regions}" x:Name="RegionGrid" HorizontalAlignment="Left" Height="328" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Название региона" Binding="{Binding NameRegion}"/>
-                                <DataGridTextColumn Header="Страна" Binding="{Binding Country}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Grid Height="42" Margin="10,0" >
-                            <Grid.ColumnDefinitions >
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="42"/>
+                    </Grid.RowDefinitions>
 
-                            <Button Command="{Binding AddRegion}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
-                            <Button Content="Изменить" Command="{Binding ChangeRegion}" Height="30" Width="90"  Grid.Column="1"/>
-                            <Button Content="Удалить" Command="{Binding DeleteRegion}" Height="30" Width="90" Grid.Column="2"/>
-                        </Grid>
-                    </StackPanel>
+                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" SelectedItem="{Binding SelectedRegion}" ItemsSource="{Binding Regions}" x:Name="RegionGrid">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn  Header="Id" Binding="{Binding Id}" Width="1*"/>
+                            <DataGridTextColumn Header="Название региона" Binding="{Binding NameRegion}" Width="10*"/>
+                            <DataGridTextColumn Header="Страна" Binding="{Binding Country.FullName}" Width="10*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Height="42" Grid.Row="1" >
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Command="{Binding AddRegion}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
+                        <Button Content="Изменить" Command="{Binding ChangeRegion}" Height="30" Width="90"  Grid.Column="1"/>
+                        <Button Content="Удалить" Command="{Binding DeleteRegion}" Height="30" Width="90" Grid.Column="2"/>
+                    </Grid>
                 </Grid>
             </TabItem>
 
             <TabItem Header="Город">
-                <Grid Background="#FFE5E5E5">
-                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Height="450" Margin="0,0,0,0" Width="543">
-                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedCity}" ItemsSource="{Binding Cities}" x:Name="CityGrid" HorizontalAlignment="Left" Height="336" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Название города" Binding="{Binding NameCity}"/>
-                                <DataGridTextColumn Header="Регоин" Binding="{Binding Region}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Grid Height="42" Margin="10,0" >
-                            <Grid.ColumnDefinitions >
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="42"/>
+                    </Grid.RowDefinitions>
 
-                            <Button Command="{Binding AddCity}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
-                            <Button Content="Изменить" Command="{Binding ChangeCity}" Height="30" Width="90"  Grid.Column="1"/>
-                            <Button Content="Удалить" Command="{Binding DeleteCity}" Height="30" Width="90" Grid.Column="2"/>
-                        </Grid>
-                    </StackPanel>
+                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" SelectedItem="{Binding SelectedCity}" ItemsSource="{Binding Cities}" x:Name="CityGrid" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="1*"/>
+                            <DataGridTextColumn Header="Название города" Binding="{Binding NameCity}" Width="10*"/>
+                            <DataGridTextColumn Header="Регион" Binding="{Binding Region.NameRegion}" Width="10*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Height="42" Grid.Row="1" >
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Command="{Binding AddCity}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
+                        <Button Content="Изменить" Command="{Binding ChangeCity}" Height="30" Width="90"  Grid.Column="1"/>
+                        <Button Content="Удалить" Command="{Binding DeleteCity}" Height="30" Width="90" Grid.Column="2"/>
+                    </Grid>
                 </Grid>
             </TabItem>
 
             <TabItem Header="Клиент">
-                <Grid Background="#FFE5E5E5" Margin="0,0,0,21">
-                    <StackPanel Background="AliceBlue" HorizontalAlignment="Left" Margin="0" Width="543">
-                        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding SelectedAddress}" ItemsSource="{Binding Addresses}" x:Name="AddressGrid" HorizontalAlignment="Left" Height="329" Margin="0,0,0,10" VerticalAlignment="Top" Width="543" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="ФИО" Binding="{Binding Person}"/>
-                                <DataGridTextColumn Header="Город" Binding="{Binding City}"/>
-                                <DataGridTextColumn Header="Улица" Binding="{Binding Street}"/>
-                                <DataGridTextColumn Header="Номер здания" Binding="{Binding Building}"/>
-                                <DataGridTextColumn Header="Номер офиса" Binding="{Binding Office}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Grid Height="42" Margin="10,0" >
-                            <Grid.ColumnDefinitions >
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="42"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAddress}" ItemsSource="{Binding Addresses}" x:Name="AddressGrid">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="1*"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Person}" Width="6*"/>
+                            <DataGridTextColumn Header="Город" Binding="{Binding City.NameCity}" Width="6*"/>
+                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="6*"/>
+                            <DataGridTextColumn Header="№ здания" Binding="{Binding Building}" Width="3*"/>
+                            <DataGridTextColumn Header="№ офиса" Binding="{Binding Office}" Width="3*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Height="42" Grid.Row="1" >
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                            <Button Command="{Binding AddAddress}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
-                            <Button Content="Изменить" Command="{Binding ChangeAddress}" Height="30" Width="90"  Grid.Column="1"/>
-                            <Button Content="Удалить" Command="{Binding DeleteAddress}" Height="30" Width="90" Grid.Column="2"/>
-                        </Grid>
-                    </StackPanel>
+                        <Button Command="{Binding AddAddress}" Content="Добавить" Height="30" Width="90" Grid.Column="0"/>
+                        <Button Content="Изменить" Command="{Binding ChangeAddress}" Height="30" Width="90"  Grid.Column="1"/>
+                        <Button Content="Удалить" Command="{Binding DeleteAddress}" Height="30" Width="90" Grid.Column="2"/>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
         <Button Content="Сохранить все в xml" Command="{Binding SaveToXml}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127"/>
+
+
     </Grid>
 </Window>

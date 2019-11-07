@@ -4,12 +4,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClientAddresses;
-namespace ClientAddresses
+
+namespace DateBase
 {
-    class ClientAddresses:DbContext
+    class Context:DbContext
     {
-        public ClientAddresses():base("DBConnection")
+        public Context():base("DBConnection")
         { }
         public DbSet<Region> Region { get; set; }
         public DbSet<City> City { get; set; }
