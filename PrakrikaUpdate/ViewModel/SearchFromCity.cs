@@ -15,11 +15,11 @@ namespace PrakrikaUpdate.ViewModel
 
         private ObservableCollection<Country> countries;
         private ObservableCollection<Region> regions;
-        private List<string> listSource;
+        private ObservableCollection<string> listSource;
         private string text;
         public string Text { get { return text; } set { text = value; OnPropertyChanged("Text"); } }
         public List<string> NameRegions { get; set; }
-        public List<string> ListSource { get { return listSource; } set { listSource = value; OnPropertyChanged(nameof(ListSource)); } }
+        public ObservableCollection<string> ListSource { get { return listSource; } set { listSource = value; OnPropertyChanged(nameof(ListSource)); } }
 
         public List<string> WhatFind { get; set; }
         public string Selected { get; set; }
@@ -56,7 +56,7 @@ namespace PrakrikaUpdate.ViewModel
             {
                 return new Commander((onj) =>
                 {
-                    ListSource = new List<string>();
+                    ListSource = new ObservableCollection<string>();
                     switch (Item)
                     {
                         case 0:
