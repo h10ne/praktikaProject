@@ -105,14 +105,37 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="42"/>
                     </Grid.RowDefinitions>
-                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAddress}" ItemsSource="{Binding Addresses}" x:Name="AddressGrid">
+                    <DataGrid 
+                        Grid.Row="0" 
+                        AutoGenerateColumns="False" 
+                        SelectedItem="{Binding SelectedAddress}" 
+                        ItemsSource="{Binding Addresses}" 
+                        x:Name="AddressGrid">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="1*"/>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding Person}" Width="6*"/>
-                            <DataGridTextColumn Header="Город" Binding="{Binding City.NameCity}" Width="6*"/>
-                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="6*"/>
-                            <DataGridTextColumn Header="№ здания" Binding="{Binding Building}" Width="3*"/>
-                            <DataGridTextColumn Header="№ офиса" Binding="{Binding Office}" Width="3*"/>
+                            <DataGridTextColumn 
+                                Header="Id" 
+                                Binding="{Binding Id}" 
+                                Width="1*"/>
+                            <DataGridTextColumn 
+                                Header="ФИО" 
+                                Binding="{Binding Person}" 
+                                Width="6*"/>
+                            <DataGridTextColumn 
+                                Header="Город" 
+                                Binding="{Binding City.NameCity}" 
+                                Width="6*"/>
+                            <DataGridTextColumn 
+                                Header="Улица" 
+                                Binding="{Binding Street}" 
+                                Width="6*"/>
+                            <DataGridTextColumn 
+                                Header="№ здания" 
+                                Binding="{Binding Building}" 
+                                Width="3*"/>
+                            <DataGridTextColumn 
+                                Header="№ офиса" 
+                                Binding="{Binding Office}" 
+                                Width="3*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Grid Height="42" Grid.Row="1" >
@@ -129,7 +152,32 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="Сохранить все в xml" Command="{Binding SaveToXml}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="1"
+                Content="Поиск с использованием региона"
+                Command="{Binding SearchFromRegions}"/>
+            <Button
+                Grid.Column="2"
+                Content="Поиск с использованием города"
+                Command="{Binding SearchFromCity}"/>
+            <Button
+                Grid.Column="0"
+                Content="Поиск с использованием страны"
+                Command="{Binding SearchFromCountry}"/>
+
+        </Grid>
+        <Button
+            Visibility="Hidden"
+            Content="Сохранить все в xml" Command="{Binding SaveToXml}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127"/>
+
+
 
 
     </Grid>

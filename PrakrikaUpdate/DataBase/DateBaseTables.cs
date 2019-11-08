@@ -17,6 +17,10 @@ namespace DateBase
         public int? Office { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
+        public override string ToString()
+        {
+            return $"Id - {Id}, City - {City.NameCity}, Street - {Street}, Buildiing - {Building}, Office - {Office}, Person - {Person}";
+        }
 
     }
     public class City
@@ -27,6 +31,10 @@ namespace DateBase
         public int RegionId { get; set; }
         public Region Region { get; set; }
         public List<Address> Address { get; set; }
+        public override string ToString()
+        {
+            return $"Id - {Id}, Name - {NameCity}, Region - {Region.NameRegion}";
+        }
     }
     public class Region
     {
@@ -36,6 +44,10 @@ namespace DateBase
         public int CountryId { get; set; }
         public List<City> City { get; set; }        
         public Country Country { get; set; }
+        public override string ToString()
+        {
+            return $"Id - {Id}, Name - {NameRegion}, Country - {Country.FullName}";
+        }
     }
     public class Country
     {
@@ -44,6 +56,10 @@ namespace DateBase
         public string FullName { get; set; }
         public string ShortName { get; set; }
         public List<Region> Region { get; set; }
+        public override string ToString()
+        {
+            return $"Id - {Id}, FullName - {FullName}, ShortName - {ShortName}";
+        }
     }
 
 }

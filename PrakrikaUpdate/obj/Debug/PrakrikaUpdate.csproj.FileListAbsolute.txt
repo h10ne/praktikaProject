@@ -121,7 +121,6 @@ C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\EntityF
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\EntityFramework.xml
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\PrakrikaUpdate.csprojAssemblyReference.cache
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\View\WindowNewRegion.baml
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\View\WindowNewAddress.g.cs
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\View\WindowNewCity.g.cs
@@ -141,3 +140,10 @@ C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\Prakrik
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\PrakrikaUpdate.csproj.CopyComplete
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\PrakrikaUpdate.exe
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\PrakrikaUpdate.pdb
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\View\SearchFromRegionsView.g.cs
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\View\SearchFromRegionsView.baml
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\PrakrikaUpdate.csprojAssemblyReference.cache

@@ -69,6 +69,7 @@ namespace PrakrikaUpdate.ViewModel
             _model = model;
             DownloadInfoToLists();
         }
+
         private Country selectedCountry;
         public Country SelectedCountry
         {
@@ -372,7 +373,7 @@ namespace PrakrikaUpdate.ViewModel
                     Address address = SelectedAddress;
                     newAddress.DataContext = address;
                     newAddress.CityBox.ItemsSource = Cities.Select(c => c.NameCity);
-                    newAddress.CityBox.SelectedItem = SelectedAddress.City;
+                    newAddress.CityBox.SelectedItem = SelectedAddress.City.NameCity;
                     if (newAddress.ShowDialog() == true)
                     {
                         using (var db = new Context())
@@ -447,6 +448,46 @@ namespace PrakrikaUpdate.ViewModel
             catch
             {
                 MessageBox.Show("Cохранить не удалось!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public Commander SearchFromRegions
+        {
+            get
+            {
+                return new Commander((obj) =>
+                {
+                    var view = new SearchFromRegionsView();
+                    var model = new SearchFromRegionsVM(countries, regions, cities, addresses);
+                    view.DataContext = model;
+                    view.Show();
+                });
+            }
+        }
+        public Commander SearchFromCity
+        {
+            get
+            {
+                return new Commander((obj) =>
+                {
+                    var view = new SearchFromRegionsView();
+                    var model = new SearchFromCityVM(countries, regions, cities, addresses);
+                    view.DataContext = model;
+                    view.Show();
+                });
+            }
+        }
+        public Commander SearchFromCountry
+        {
+            get
+            {
+                return new Commander((obj) =>
+                {
+                    var view = new SearchFromRegionsView();
+                    var model = new SearchFromCountryVM(countries, regions, cities, addresses);
+                    view.DataContext = model;
+                    view.Show();
+                });
             }
         }
 
