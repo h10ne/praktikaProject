@@ -158,6 +158,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="1"
@@ -171,6 +172,10 @@
                 Grid.Column="0"
                 Content="Поиск с использованием страны"
                 Command="{Binding SearchFromCountry}"/>
+            <Button
+                Grid.Column="3"
+                Content="Своеобразные запросы"
+                Command="{Binding SpecialSearch}"/>
 
         </Grid>
         <Button

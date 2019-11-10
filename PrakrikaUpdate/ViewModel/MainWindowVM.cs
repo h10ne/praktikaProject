@@ -491,5 +491,19 @@ namespace PrakrikaUpdate.ViewModel
             }
         }
 
+        public Commander SpecialSearch
+        {
+            get
+            {
+                return new Commander((obj) =>
+                {
+                    var view = new SpecialSearch();
+                    var model = new SpecSearchVM(countries, regions, cities, addresses);
+                    view.DataContext = model;
+                    view.Show();
+                });
+            }
+        }
+
     }
 }

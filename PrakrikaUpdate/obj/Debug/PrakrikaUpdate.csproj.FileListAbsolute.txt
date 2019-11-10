@@ -147,3 +147,5 @@ C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\System.
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\Microsoft.Expression.Interactions.xml
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\bin\Debug\System.Windows.Interactivity.xml
 C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\PrakrikaUpdate.csprojAssemblyReference.cache
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\View\SpecialSearch.g.cs
+C:\Users\H10ne\Documents\GitHub\praktikaProject\PrakrikaUpdate\obj\Debug\View\SpecialSearch.baml

@@ -74,8 +74,12 @@
     <Compile Include="ViewModel\SearchFromCity.cs" />
     <Compile Include="ViewModel\SearchFromCountry.cs" />
     <Compile Include="ViewModel\SearchFromRegionsVM.cs" />
+    <Compile Include="ViewModel\SpecSearchVM.cs" />
     <Compile Include="View\SearchFromRegionsView.xaml.cs">
       <DependentUpon>SearchFromRegionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SpecialSearch.xaml.cs">
+      <DependentUpon>SpecialSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowNewAddress.xaml.cs">
       <DependentUpon>WindowNewAddress.xaml</DependentUpon>
@@ -91,6 +95,10 @@
     </Compile>
     <Compile Include="Helpers\XMLClass.cs" />
     <Page Include="View\SearchFromRegionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SpecialSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
