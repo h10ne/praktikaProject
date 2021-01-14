@@ -1,23 +1,36 @@
-<?xml version="1.0"?>
-<StudyRoom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Teachers>
-    <Teacher>
-      <Name>Иван</Name>
-      <Surname>Петрович</Surname>
-    </Teacher>
-  </Teachers>
-  <Students>
-    <Student>
-      <SName>Марат</SName>
-      <SSurname>Алаев</SSurname>
-    </Student>
-    <Student>
-      <SName>Глеб</SName>
-      <SSurname>Стрюков</SSurname>
-    </Student>
-    <Student>
-      <SName>Денис</SName>
-      <SSurname>Овлашенко</SSurname>
-    </Student>
-  </Students>
-</StudyRoom>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="StudyRoom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Teachers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Teacher">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="Name"/>
+                    <xs:element type="xs:string" name="Surname"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Students">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Student" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="SName"/>
+                    <xs:element type="xs:string" name="SSurname"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
